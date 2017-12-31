@@ -14,7 +14,7 @@ interface gallInitObj {
 }
 // -- interfaces -- //
 
-// -- run -- //
+// -- code -- //
 async function initGalleryArr(gallRoot): Promise<gallInitObj[]> {
     
     const gallJSON = await XLSXtoJSON(gallRoot + '/_galleries.xlsx');
@@ -34,7 +34,6 @@ async function addItemsToGalleryArr(gallInitArr: any) {
         });
     }
     return gallInitArr;
-    // path.extname(gall.items[0].dir)
 }
 
 export async function getGallJSON(gallRoot) {
