@@ -25,5 +25,5 @@ export async function XLSXtoJSON(
 }
 
 // -- test
-XLSXtoJSON('../test-files/evets.xlsx')
-.then((x) => console.log(x));
+// XLSXtoJSON('../test-files/evets.xlsx')
+// .then((x) => console.log(x));

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "C:\\Users\\DOVY\\Desktop\\AV-cms\\cmds\\av-start.bat",
-    "tsc": "tsc --watch"
+    "tsc": "tsc --watch",
+    "tsc-res": "tsc --traceResolution"
   },
   "author": "",
   "license": "ISC",

@@ -1,10 +1,12 @@
 // import { XLSXtoJSON } from './av-xlsx-to-json';
-// import * as path from 'path';
+import * as path from 'path';
 import * as fs from 'fs';
 // -- imports -- //
 
 // -- code -- //
 export const clone = (obj: any) => JSON.parse(JSON.stringify(obj));
+
+export const cleanPath = (p: string) => path.normalize(p).replace(/\\/g, "/");
 
 export function renameKey(obj, oldKey, newKey) {
     let newObj = clone(obj);
@@ -22,6 +24,15 @@ export function getFolderList(dir: fs.PathLike): { "folder-name": string, dir: f
 
     return fileObjs.filter((obj) => 
         fs.statSync(obj.dir).isDirectory()
+    );
+}
+
+export function getFileList(dir: fs.PathLike): { "file-name": string, dir: fs.PathLike }[] {
+    let fileObjs: any = getFileAndFolderList(dir);
+    fileObjs = fileObjs.map((obj) => renameKey(obj, 'name', 'file-name'));
+
+    return fileObjs.filter((obj) => 
+        fs.statSync(obj.dir).isFile()
     );
 }
 
