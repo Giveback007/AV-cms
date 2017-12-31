@@ -1,4 +1,4 @@
-// import { XLSXtoJSON } from './av-xlsx-to-json';
+import { cleanPath } from './util';
 import * as path from 'path';
 import * as fs from 'fs';
 // -- imports -- //
@@ -42,5 +42,15 @@ export function mergeObjsInArrs(objArr1: any[], objArr2: any[], matchKey): any[]
         let obj2 = arr2.find((tryObj) => obj1[matchKey] === tryObj[matchKey]);
         return { ...obj1, ...obj2 };
     });
+}
+
+export function writeJsonToFile(data: any, pathTo: string, fileName): void {
+    fs.writeFile(
+        cleanPath(pathTo + '/' + fileName + '.json'), 
+        JSON.stringify(data),
+        (err) => err ? 
+            console.log(err) : 
+            console.log(`${fileName}.json - save to: ${cleanPath(pathTo)}`)
+    )
 }
 // -- code -- //
