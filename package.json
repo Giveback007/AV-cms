@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "C:\\Users\\DOVY\\Desktop\\AV-cms\\cmds\\av-start.bat",
-    "tsc": "tsc --watch",
-    "tsc-res": "tsc --traceResolution"
+    "start": "C:\\Users\\DOVY\\Desktop\\AV-cms\\cmds\\av-start-dev.bat",
+    "tsc": "tsc --watch"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +14,10 @@
   },
   "devDependencies": {
     "@types/node": "8.5.2",
+    "nodemon": "^1.14.7",
     "typescript": "2.6.2"
+  },
+  "nodemonConfig": {
+    "verbose": true
   }
 }
