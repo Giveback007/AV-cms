@@ -1,0 +1,19 @@
+{
+  "name": "av-cms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "C:\\Users\\DOVY\\Desktop\\AV-cms\\cmds\\av-start.bat",
+    "tsc": "tsc --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "xlsx2json": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "8.5.2",
+    "typescript": "2.6.2"
+  }
+}
