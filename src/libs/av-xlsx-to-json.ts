@@ -9,7 +9,6 @@ export async function XLSXtoJSON(
     dir: fs.PathLike, 
     { headless = false } = { }
 ): Promise<any> {
-
     const head = ( await readXLSX(dir) )[0][0];
     const entries = Object.entries(head);
     const map = {};

@@ -15,21 +15,36 @@ interface gallInitObj {
 // -- interfaces -- //
 
 // -- run -- //
-export async function initGalleryArr(gallRoot): Promise<gallInitObj[]> {
+async function initGalleryArr(gallRoot): Promise<gallInitObj[]> {
     
-    const galJSON = await XLSXtoJSON(gallRoot + '/_galleries.xlsx');
+    const gallJSON = await XLSXtoJSON(gallRoot + '/_galleries.xlsx');
     const folders = getFolderList(gallRoot);
-    folders.map((obj: any) => obj.xlsx = obj['folder-name'] + '.xlsx');
-    return mergeObjsInArrs(galJSON, folders, 'folder-name');
+    folders.map((obj: any) => obj.xlsx = `${gallRoot}/${obj['file-name']}.xlsx`);
+    return mergeObjsInArrs(gallJSON, folders, 'file-name');
+}
+
+async function addItemsToGalleryArr(gallInitArr: any) {
+    for (let gall of gallInitArr) {
+        let items = getFileList(gall.path);
+        let itemsJSON = await XLSXtoJSON(gall.xlsx);
+        gall.items = items.map((item) => {
+            let ext = path.extname(item['file-name']);
+            let found = itemsJSON.find( (match) => item['file-name'] === match['file-name'] + ext );
+            return { ...found, ...item };
+        });
+    }
+    return gallInitArr;
+    // path.extname(gall.items[0].dir)
 }
 
 export async function getGallJSON(gallRoot) {
     gallRoot = cleanPath(gallRoot);
     const initArr = await initGalleryArr(gallRoot);
-    initArr.map((gall: any) => gall.items = getFileList(gall.dir))
-    return initArr;
+    let x = addItemsToGalleryArr(initArr)
+    
+    return x;
 }
 
 // -- test
-// XLSXtoJSON('../test-files/galleries/galleries.xlsx')
+// getGallJSON('../test-files/galleries/galleries.xlsx')
 // .then((x) => console.log(x));

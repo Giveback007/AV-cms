@@ -15,28 +15,28 @@ export function renameKey(obj, oldKey, newKey) {
     return newObj;
 }
 
-export const getFileAndFolderList = (dir: fs.PathLike): { name: string, dir: fs.PathLike }[] => 
-    fs.readdirSync(dir).map( (file) => ({ name: file, dir: dir + '/' + file }) );
+export const getFileAndFolderList = (dir: fs.PathLike): { "file-name": string, path: fs.PathLike }[] => 
+    fs.readdirSync(dir).map( (file) => ({ "file-name": file, path: dir + '/' + file }) );
 
-export function getFolderList(dir: fs.PathLike): { "folder-name": string, dir: fs.PathLike }[] {
-    let fileObjs: any = getFileAndFolderList(dir);
-    fileObjs = fileObjs.map((obj) => renameKey(obj, 'name', 'folder-name'));
+export function getFolderList(dir: fs.PathLike) {
+    let fileObjs = getFileAndFolderList(dir);
+    // fileObjs = fileObjs.map((obj) => renameKey(obj, 'name', 'folder-name'));
 
     return fileObjs.filter((obj) => 
-        fs.statSync(obj.dir).isDirectory()
+        fs.statSync(obj.path).isDirectory()
     );
 }
 
-export function getFileList(dir: fs.PathLike): { "file-name": string, dir: fs.PathLike }[] {
-    let fileObjs: any = getFileAndFolderList(dir);
-    fileObjs = fileObjs.map((obj) => renameKey(obj, 'name', 'file-name'));
+export function getFileList(dir: fs.PathLike) {
+    let fileObjs = getFileAndFolderList(dir);
+    // fileObjs = fileObjs.map((obj) => renameKey(obj, 'name', 'file-name'));
 
     return fileObjs.filter((obj) => 
-        fs.statSync(obj.dir).isFile()
+        fs.statSync(obj.path).isFile()
     );
 }
 
-export function mergeObjsInArrs(objArr1: any[], objArr2: any[], matchKey: string): any[] {
+export function mergeObjsInArrs(objArr1: any[], objArr2: any[], matchKey): any[] {
     const arr1 = clone(objArr1); const arr2 = clone(objArr2);
     return arr1.map((obj1) => {
         let obj2 = arr2.find((tryObj) => obj1[matchKey] === tryObj[matchKey]);
