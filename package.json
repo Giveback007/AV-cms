@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "C:\\Users\\DOVY\\Desktop\\AV-cms\\cmds\\av-start-dev.bat",
+    "start": "cmds\\av-start-dev.bat",
     "tsc": "tsc --watch"
   },
   "author": "",

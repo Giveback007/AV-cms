@@ -1,3 +1,4 @@
+import { cleanPath } from './../utils/util';
 import * as readXLSX from 'xlsx2json';
 import * as fs from 'fs';
 
@@ -6,9 +7,10 @@ import * as fs from 'fs';
 // outputs a promise
 
 export async function XLSXtoJSON(
-    dir: fs.PathLike, 
+    dir: string, 
     { headless = false } = { }
 ): Promise<any> {
+    dir = cleanPath(dir);
     const head = ( await readXLSX(dir) )[0][0];
     const entries = Object.entries(head);
     const map = {};

@@ -15,17 +15,16 @@ interface gallInitObj {
 // -- interfaces -- //
 
 // -- code -- //
-async function initGalleryArr(gallRoot): Promise<gallInitObj[]> {
-    
-    const gallJSON = await XLSXtoJSON(gallRoot + '/_galleries.xlsx');
+async function initGalleryArr(gallRoot): Promise<gallInitObj[]> {    
+    const gallJSON = await XLSXtoJSON(gallRoot + '/galleries.xlsx');
     const folders = getFolderList(gallRoot);
-    folders.map((obj: any) => obj.xlsx = `${gallRoot}/${obj['file-name']}.xlsx`);
+    folders.map((obj: any) => obj.xlsx = `${gallRoot}/${obj['file-name']}/${obj['file-name']}.xlsx`);
     return mergeObjsInArrs(gallJSON, folders, 'file-name');
 }
 
 async function addItemsToGalleryArr(gallInitArr: any) {
     for (let gall of gallInitArr) {
-        let items = getFileList(gall.path);
+        let items = getFileList(gall.path + '/items');
         let itemsJSON = await XLSXtoJSON(gall.xlsx);
         gall.items = items.map((item) => {
             let ext = path.extname(item['file-name']);

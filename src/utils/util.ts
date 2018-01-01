@@ -14,22 +14,18 @@ export function renameKey(obj, oldKey, newKey) {
     return newObj;
 }
 
-export const getFileAndFolderList = (dir: fs.PathLike): { "file-name": string, path: fs.PathLike }[] => 
+export const getFileAndFolderList = (dir: string): { "file-name": string, path: string }[] => 
     fs.readdirSync(dir).map( (file) => ({ "file-name": file, path: dir + '/' + file }) );
 
-export function getFolderList(dir: fs.PathLike) {
+export function getFolderList(dir: string) {
     let fileObjs = getFileAndFolderList(dir);
-    // fileObjs = fileObjs.map((obj) => renameKey(obj, 'name', 'folder-name'));
-
     return fileObjs.filter((obj) => 
         fs.statSync(obj.path).isDirectory()
     );
 }
 
-export function getFileList(dir: fs.PathLike) {
+export function getFileList(dir: string) {
     let fileObjs = getFileAndFolderList(dir);
-    // fileObjs = fileObjs.map((obj) => renameKey(obj, 'name', 'file-name'));
-
     return fileObjs.filter((obj) => 
         fs.statSync(obj.path).isFile()
     );
@@ -49,7 +45,7 @@ export function writeJsonToFile(data: any, pathTo: string, fileName): void {
         JSON.stringify(data),
         (err) => err ? 
             console.log(err) : 
-            console.log(`${fileName}.json - save to: ${cleanPath(pathTo)}`)
+            console.log(`${fileName}.json - saved to: ${cleanPath(pathTo)}`)
     )
 }
 // -- code -- //
